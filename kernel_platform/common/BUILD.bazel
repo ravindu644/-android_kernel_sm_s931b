@@ -156,6 +156,14 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+filegroup(
+    name = "custom_defconfig_fragments",
+    srcs = [
+        "custom.config",
+    ],
+    visibility = ["//visibility:public"],
+)
+
 define_common_kernels(target_configs = {
     "kernel_aarch64": {
         "kmi_symbol_list_strict_mode": True,
@@ -165,7 +173,7 @@ define_common_kernels(target_configs = {
         "protected_exports_list": "android/abi_gki_protected_exports_aarch64",
         "protected_modules_list": ":gki_aarch64_protected_modules",
         "module_implicit_outs": get_gki_modules_list("arm64") + get_kunit_modules_list("arm64"),
-        "defconfig_fragments": [":sec_defconfig_fragments"],
+        "defconfig_fragments": [":sec_defconfig_fragments", ":custom_defconfig_fragments"],
         "make_goals": _GKI_AARCH64_MAKE_GOALS,
         "ddk_headers_archive": ":kernel_aarch64_ddk_headers_archive",
         "extra_dist": [
@@ -181,7 +189,7 @@ define_common_kernels(target_configs = {
         "protected_exports_list": "android/abi_gki_protected_exports_aarch64",
         "protected_modules_list": ":gki_aarch64_protected_modules",
         "module_implicit_outs": get_gki_modules_list("arm64") + get_kunit_modules_list("arm64"),
-        "defconfig_fragments": [":sec_defconfig_fragments"],
+        "defconfig_fragments": [":sec_defconfig_fragments", ":custom_defconfig_fragments"],
         "make_goals": _GKI_AARCH64_MAKE_GOALS,
         "ddk_headers_archive": ":kernel_aarch64_ddk_headers_archive",
         "extra_dist": [

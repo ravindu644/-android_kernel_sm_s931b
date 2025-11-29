@@ -22,7 +22,19 @@ def define_extras(target, flavor = None, alias = None):
     return
 
 def get_build_config_fragments(target):
-    return []
+    """Returns list of build config fragments to merge.
+
+    Custom config fragments are merged after the base configs but before
+    platform-specific configs, allowing customization of kernel features.
+
+    The custom.config file is located at msm-kernel/custom.config
+    (symlink to ../../custom_defconfigs/custom.config)
+
+    Note: The same custom.config is also applied to the common kernel
+    (which builds the Image) via common/BUILD.bazel defconfig_fragments.
+    This ensures both kernels are in sync with custom changes.
+    """
+    return ["custom.config"]
 
 def get_dtb_list(target):
     return _get_dtb_list(target)
